@@ -5,32 +5,32 @@ from shape import Shape
 import numpy as np
 
 class Triangle(Shape):
-    def __init__(self, p1: Point, p2: Point, p3: Point):
-        self.p1 = p1
-        self.p2 = p2
-        self.p3 = p3
+    def __init__(self, a: Point, b: Point, c: Point):
+        self.a = a
+        self.b = b
+        self.c = c
 
     def area(self) -> float:
-        a = np.array([self.p2.x - self.p1.x, self.p2.y - self.p1.y])
-        b = np.array([self.p3.x - self.p1.x, self.p3.y - self.p1.y])
+        a = np.array([self.b.x - self.a.x, self.b.y - self.a.y])
+        b = np.array([self.c.x - self.a.x, self.c.y - self.a.y])
         return float(0.5 * abs(np.cross(a, b)))
 
     def is_valid(self) -> bool:
-        if self.p1 == self.p2 or self.p2 == self.p3 or self.p1 == self.p3:
+        if self.a == self.b or self.b == self.c or self.a == self.c:
             return False
         return True
 
     @property
     def centroid(self) -> Point:
         return Point(
-            (self.p1.x + self.p2.x + self.p3.x) / 3.0,
-            (self.p1.y + self.p2.y + self.p3.y) / 3.0
+            (self.a.x + self.b.x + self.c.x) / 3.0,
+            (self.a.y + self.b.y + self.c.y) / 3.0
         )
 
     def _side_lengths(self):
-        a = self.p2.distance_to(self.p3)
-        b = self.p3.distance_to(self.p1)
-        c = self.p1.distance_to(self.p2)
+        a = self.b.distance_to(self.c)
+        b = self.c.distance_to(self.a)
+        c = self.a.distance_to(self.b)
         return a, b, c
 
     def angles(self):
@@ -39,18 +39,19 @@ class Triangle(Shape):
         def clamp(x: float) -> float:
             return max(-1.0, min(1.0, x))
 
-        cosA = clamp((b * b + c * c - a * a) / (2 * b * c))
-        cosB = clamp((a * a + c * c - b * b) / (2 * a * c))
-        cosC = clamp((a * a + b * b - c * c) / (2 * a * b))
+        cos_a = clamp((b * b + c * c - a * a) / (2 * b * c))
+        cos_b = clamp((a * a + c * c - b * b) / (2 * a * c))
+        cos_c = clamp((a * a + b * b - c * c) / (2 * a * b))
 
-        A = math.acos(cosA)
-        B = math.acos(cosB)
-        C = math.acos(cosC)
+        angle_a = math.acos(cos_a)
+        andle_b = math.acos(cos_b)
+        angle_c = math.acos(cos_c)
 
-        return (A, B, C)
+        return f"{angle_a:.2f} {andle_b:.2f} {angle_c:.2f}"
 
-
-
+class Polygon(Shape):
+    def __init__(self, *points: Point):
+        self.points = points
 
 
 

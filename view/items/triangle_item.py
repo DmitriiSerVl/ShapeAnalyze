@@ -6,42 +6,35 @@ from model.shapes import Triangle
 
 
 class TriangleItem(QGraphicsPolygonItem):
-    R = 6
 
     def __init__(self, model: Triangle):
-
         points = [
-            QPointF(200, 50),
-            QPointF(50, 350),
-            QPointF(350, 350)
+            QPointF(60, 60),
+            QPointF(15, 140),
+            QPointF(140, 140)
         ]
         super().__init__(QPolygonF(points))
+
         self.model = model
+        self.setPos(model.a.x, model.a.y)
         self.setBrush(QBrush(QColor(38, 99, 255)))
         self.setPen(QPen(QColor(10, 30, 80), 1))
         self.setFlag(QGraphicsEllipseItem.GraphicsItemFlag.ItemIsMovable, True)
         self.setFlag(QGraphicsEllipseItem.GraphicsItemFlag.ItemIsSelectable, True)
         self.setFlag(QGraphicsEllipseItem.GraphicsItemFlag.ItemSendsGeometryChanges, True)
 
-        # super().__init__()
-        # painter = QPainter(self)
-        # painter.setRenderHint(QPainter.Antialiasing)
-        # points = [
-        #     QPoint(200, 50),
-        #     QPoint(50, 350),
-        #     QPoint(350, 350)
-        # ]
-        #
-        # # Create a QPolygon from the points
-        # triangle = QPolygon(points)
-        #
-        # # Set the brush (fill color)
-        # painter.setBrush(QBrush(QColor(0, 255, 0, 255)))  # Green color
-        #
-        # # Draw the polygon
-        # painter.drawPolygon(triangle)
-
     def itemChange(self, change, value):
-        if change == QGraphicsEllipseItem.GraphicsItemChange.ItemPositionHasChanged:
+        if change == QGraphicsPolygonItem.GraphicsItemChange.ItemPositionHasChanged:
             pos: QPointF = self.pos()
+
+            self.model.a.x = float(pos.x())
+            self.model.a.y = float(pos.y())
+
+            self.model.b.x = float(pos.x())
+            self.model.b.y = float(pos.y())
+
+            self.model.c.x = float(pos.x())
+            self.model.c.y = float(pos.y())
+
+
         return super().itemChange(change, value)

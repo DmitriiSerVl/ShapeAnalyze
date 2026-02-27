@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout
 
 from model.point import Point
+from model.shapes import Triangle
 
 
 class PropertiesPanel(QFrame):
@@ -29,6 +30,16 @@ class PropertiesPanel(QFrame):
 
         if isinstance(obj, Point):
             self.info.setText(f"Точка\nx: {obj.x:.2f}\ny: {obj.y:.2f}")
+            return
+        elif isinstance(obj, Triangle):
+            triangle_area = obj.area()
+            triangle_angles = obj.angles()
+            self.info.setText(f"Треугольник\na: x: {obj.a.x:.2f} y: {obj.a.y:.2f}\n"
+                              f"b: x: {obj.b.x:.2f} y: {obj.b.y:.2f}\n"
+                              f"c: x: {obj.c.x:.2f} y: {obj.c.y:.2f}\n\n"
+                              f"Площадь: {triangle_area}\n\n"
+                              f"Углы: {triangle_angles}\n\n"
+                              )
             return
 
         self.info.setText("Неизвестный объект")
