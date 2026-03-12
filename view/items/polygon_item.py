@@ -9,10 +9,10 @@ class PolygonItem(QGraphicsPolygonItem):
 
     def __init__(self, model: Polygon):
         points = [
-            QPointF(model.a.x, model.a.y),
-            QPointF(model.b.x, model.b.y),
-            QPointF(model.c.x, model.c.y),
-            QPointF(model.d.x, model.d.y)
+            QPointF(model.points[0].x, model.points[0].y),
+            QPointF(model.points[1].x, model.points[1].y),
+            QPointF(model.points[2].x, model.points[2].y),
+            QPointF(model.points[3].x, model.points[3].y)
         ]
 
         super().__init__(QPolygonF(points))
@@ -34,13 +34,15 @@ class PolygonItem(QGraphicsPolygonItem):
         if change == QGraphicsPolygonItem.GraphicsItemChange.ItemPositionHasChanged:
             pos: QPointF = self.pos()
 
-            self.model.a.x = float(pos.x())
-            self.model.a.y = float(pos.y())
+            self.model.points[0].x = float(pos.x())
+            self.model.points[0].y = float(pos.y())
 
-            self.model.b.x = float(pos.x())
-            self.model.b.y = float(pos.y())
+            self.model.points[1].x = float(pos.x())
+            self.model.points[1].y = float(pos.y())
 
-            self.model.c.x = float(pos.x())
-            self.model.c.y = float(pos.y())
+            self.model.points[2].x = float(pos.x())
+            self.model.points[2].y = float(pos.y())
 
         return super().itemChange(change, value)
+
+

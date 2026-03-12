@@ -7,11 +7,8 @@ from model.point import Point
 
 
 class Polygon():
-    def __init__(self, a: Point, b: Point, c: Point, d: Point):
-        self.a = a
-        self.b = b
-        self.c = c
-        self.d = d
+    def __init__(self, *points: Point):
+       self.points = points
 
     def order_points(self, points: list[Point]) -> list[Point]:
         """Order points around centroid to form a non-self-intersecting contour."""
@@ -21,7 +18,7 @@ class Polygon():
 
     # , p1: Point, p2: Point, p3: Point, p4: Point
     def area(self) -> float:
-        pts = self.order_points([self.b, self.b, self.c, self.d])
+        pts = self.order_points([self.points[0], self.points[1], self.points[2], self.points[3]])
         s = 0.0
         n = len(pts)
         for i in range(n):
@@ -31,7 +28,7 @@ class Polygon():
 
     #  p1: Point, p2: Point, p3: Point, p4: Point
     def perimeter(self) -> float:
-        pts = self.order_points([self.b, self.b, self.c, self.d])
+        pts = self.order_points([self.points[0], self.points[1], self.points[2], self.points[4]])
         per = 0.0
         n = len(pts)
         for i in range(n):

@@ -42,11 +42,11 @@ class PropertiesPanel(QFrame):
                               )
             return
         elif isinstance(obj, Polygon):
-            triangle_area = obj.area()
-            self.info.setText(f"Фигура\na: x: {obj.a.x:.2f} y: {obj.a.y:.2f}\n"
-                              f"b: x: {obj.b.x:.2f} y: {obj.b.y:.2f}\n"
-                              f"c: x: {obj.c.x:.2f} y: {obj.c.y:.2f}\n\n"
-                              f"Площадь: {triangle_area}\n\n"
+            polygon_area = obj.area()
+            self.info.setText(f"Фигура\na: x: {obj.points[0].x:.2f} y: {obj.points[0].y:.2f}\n"
+                              f"b: x: {obj.points[1].x:.2f} y: {obj.points[1].y:.2f}\n"
+                              f"c: x: {obj.points[2].x:.2f} y: {obj.points[2].y:.2f}\n\n"
+                              f"Площадь: {polygon_area}\n\n"
                               )
             return
 

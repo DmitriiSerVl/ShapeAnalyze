@@ -79,14 +79,14 @@ class CanvasScene(QGraphicsScene):
         self.pointsCountChanged.emit(0)
         self.selectionChangedObject.emit(None)
 
-    def create_triangle(self):
-        triangle_coordinates = Triangle(Point(60, 60), Point(15, 140), Point(140, 140))
-        self.addItem(TriangleItem(triangle_coordinates))
-
-    def create_polygon(self):
-        triangle_coordinates = Polygon(Point(60, 60), Point(15, 140)
-                                       ,Point(140, 140), Point(240, 240))
-        self.addItem(PolygonItem(triangle_coordinates))
+    # def create_triangle(self):
+    #     triangle_coordinates = Triangle(Point(60, 60), Point(15, 140), Point(140, 140))
+    #     self.addItem(TriangleItem(triangle_coordinates))
+    #
+    # def create_polygon(self):
+    #     triangle_coordinates = Polygon(Point(60, 60), Point(15, 140)
+    #                                    ,Point(140, 140), Point(240, 240))
+    #     self.addItem(PolygonItem(triangle_coordinates))
 
     def open_form_add_points_to_triangle(self):
         if self.form_window is None:
@@ -117,6 +117,7 @@ class CanvasScene(QGraphicsScene):
         self.form_window_creare_polygon.submit_button.clicked.connect(self.open_form_create_polygon)
         if self.form_window_creare_polygon.submit_action:
             self.addItem(PolygonItem(self.form_window_creare_polygon.polygon_coordinates))
+            # self.selectionChangedObject.emit(None)
             print("Hello")
             self.form_window_creare_polygon.submit_action = False
 
@@ -238,11 +239,14 @@ class FormCreatePolygon(QMainWindow):
         cy = float(self.c_y.text())
         dx = float(self.d_x.text())
         dy = float(self.d_y.text())
-        self.polygon_coordinates = [ax, ay, bx, by, cx, cy, dx, dy]
+        # self.polygon_coordinates = [ax, ay, bx, by, cx, cy, dx, dy]
         self.polygon_coordinates = Polygon(
             Point(ax, ay),
             Point(bx, by),
             Point(cx, cy),
             Point(dx, dy))
+
+
+
         print(self.polygon_coordinates)
         self.submit_action = True
