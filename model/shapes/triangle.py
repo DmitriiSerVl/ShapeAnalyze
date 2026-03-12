@@ -1,8 +1,10 @@
 import math
 
-from model.point import Point
-from shape import Shape
 import numpy as np
+
+from model.point import Point
+from model.shape import Shape
+
 
 class Triangle(Shape):
     def __init__(self, a: Point, b: Point, c: Point):
@@ -27,14 +29,14 @@ class Triangle(Shape):
             (self.a.y + self.b.y + self.c.y) / 3.0
         )
 
-    def _side_lengths(self):
+    def side_lengths(self):
         a = self.b.distance_to(self.c)
         b = self.c.distance_to(self.a)
         c = self.a.distance_to(self.b)
         return a, b, c
 
     def angles(self):
-        a, b, c = self._side_lengths()
+        a, b, c = self.side_lengths()
 
         def clamp(x: float) -> float:
             return max(-1.0, min(1.0, x))
@@ -48,10 +50,3 @@ class Triangle(Shape):
         angle_c = math.acos(cos_c)
 
         return f"{angle_a:.2f} {andle_b:.2f} {angle_c:.2f}"
-
-class Polygon(Shape):
-    def __init__(self, *points: Point):
-        self.points = points
-
-
-

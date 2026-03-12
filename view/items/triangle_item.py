@@ -2,16 +2,16 @@ from PySide6.QtCore import QPointF, QPoint
 from PySide6.QtGui import QBrush, QColor, QPen, QPolygonF, QPainter, QPolygon
 from PySide6.QtWidgets import QGraphicsEllipseItem, QGraphicsPolygonItem, QWidget
 
-from model.shapes import Triangle
+from model.shapes.triangle import Triangle
 
 
 class TriangleItem(QGraphicsPolygonItem):
 
     def __init__(self, model: Triangle):
         points = [
-            QPointF(60, 60),
-            QPointF(15, 140),
-            QPointF(140, 140)
+            QPointF(model.a.x, model.a.y),
+            QPointF(model.b.x, model.b.y),
+            QPointF(model.c.x, model.c.y)
         ]
         super().__init__(QPolygonF(points))
 

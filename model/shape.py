@@ -7,9 +7,9 @@ class Shape(ABC):
     def area(self) -> float:
         pass
 
-    @abstractmethod
-    def perimeter(self) -> float:
-        pass
+    # @abstractmethod
+    # def perimeter(self) -> float:
+    #     pass
 
     @abstractmethod
     def is_valid(self) -> bool:

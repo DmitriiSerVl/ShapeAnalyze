@@ -1,6 +1,7 @@
-import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QFormLayout, QLineEdit, QSpinBox, QPushButton
+from PySide6.QtWidgets import QMainWindow, QWidget, QFormLayout, QLineEdit, QPushButton
 
+from model.point import Point
+from model.shapes.triangle import Triangle
 
 class FormWindow(QMainWindow):
     def __init__(self):
@@ -30,12 +31,9 @@ class FormWindow(QMainWindow):
         form_layout.addRow(self.submit_button)
 
     def submit_form(self):
-        pass
-        # print(f"Name: {self.name_edit.text()}, Email: {self.email_edit.text()}, Age: {self.age_spinbox.value()}")
+        triangle_coordinates = Triangle(Point(60, 60), Point(15, 140), Point(140, 140))
+        # CanvasScene.addItem(TriangleItem(triangle_coordinates))
+         # return TriangleItem(triangle_coordinates)
 
+        # print(f"Name: {self.name_edit.text()}, Email: {self.emaыil_edit.text()}, Age: {self.age_spinbox.value()}")
 
-# if __name__ == "__main__":
-#     app = QApplication(sys.argv)
-#     window = FormWindow()
-#     window.show()
-#     sys.exit(app.exec())
