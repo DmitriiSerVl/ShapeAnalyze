@@ -29,14 +29,9 @@ class MainWindow(QMainWindow):
         self.cursor_label = QLabel("Cursor: (0.00, 0.00)")
         sb.addPermanentWidget(self.points_label)
         sb.addPermanentWidget(self.cursor_label)
-
-
-
         self.scene.selectionChangedObject.connect(self.props.show_object)
         self.scene.pointsCountChanged.connect(lambda n: self.points_label.setText(f"Points: {n}"))
         self.scene.cursorMoved.connect(lambda x, y: self.cursor_label.setText(f"Cursor: ({x:.2f}, {y:.2f})"))
-
-
         tb = QToolBar("Left Toolbar", self)
         self.addToolBar(Qt.LeftToolBarArea, tb)
         tb.setStyleSheet("QToolBar { background-color: #3a4f5e;}"
@@ -57,6 +52,7 @@ class MainWindow(QMainWindow):
             largest_triangle_icon = QIcon()
             convex_hall_triangle_icon = QIcon()
             clear_all_icon = QIcon()
+
         self.addActionToToolBar(tb, add_point_icon, "Add Point", self.scene.clear_all)
         self.addActionToToolBar(tb, select_point_icon, "Select", self.scene.clear_all)
         self.addActionToToolBar(tb, auto_triangulate_icon, "Auto Triangulate", self.scene.open_form_add_points_to_triangle)
